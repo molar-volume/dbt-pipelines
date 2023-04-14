@@ -21,24 +21,24 @@ jobs:
         image: dbt-snowflake
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
 
-      - name: DBT execution
-        run:
-          command: |
-            cd dbt
-            dbt deps
-            dbt test
-            dbt seed
-            dbt run
-        env:
-          account: ${{ secrets.SF_ACCOUNT }}
-          user: ${{ secrets.SF_USER }}
-          password: ${{ secrets.SF_PASS }}
-          role: sysadmin
-          warehouse: wh_sfp
-          database: mt_py
-          schema: uat
-          target: UAT
+        - name: DBT execution
+          run:
+            command: |
+              cd dbt
+              dbt deps
+              dbt test
+              dbt seed
+              dbt run
+          env:
+            account: ${{ secrets.SF_ACCOUNT }}
+            user: ${{ secrets.SF_USER }}
+            password: ${{ secrets.SF_PASS }}
+            role: sysadmin
+            warehouse: wh_sfp
+            database: mt_py
+            schema: uat
+            target: UAT
