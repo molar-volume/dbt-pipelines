@@ -15,20 +15,21 @@ on:
 jobs:
   DBT:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/dbt-labs/dbt-snowflake
 
+  # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       - name: DBT execution
-        uses: molar-volume/dbt@snowflake
-        with:
-          command: |
-            dbt deps
-            dbt test
-            dbt seed
-            dbt run
-          project_folder: dbt
+        run: |
+          cd dbt
+          dbt deps
+          dbt test
+          dbt seed
+          dbt run
         env:
           account: ${{ secrets.SF_ACCOUNT }}
           user: ${{ secrets.SF_USER }}
