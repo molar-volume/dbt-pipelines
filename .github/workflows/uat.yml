@@ -26,13 +26,12 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: DBT execution
-        run:
-          command: |
-            cd dbt
-            dbt deps
-            dbt test
-            dbt seed
-            dbt run
+        run: |
+          cd dbt
+          dbt deps
+          dbt test
+          dbt seed
+          dbt run
         env:
           account: ${{ secrets.SF_ACCOUNT }}
           user: ${{ secrets.SF_USER }}
